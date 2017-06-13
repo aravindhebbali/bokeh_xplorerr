@@ -26,3 +26,31 @@ h
 b <- figure(ylab = 'Height', width = 500) %>%
   ly_boxplot(voice.part, height, data = lattice::singer)
 b
+
+# bar plot
+mtcars$cyl <- as.factor(mtcars$cyl)
+mtcars$gear <- as.factor(mtcars$gear)
+ba <- figure() %>%
+  ly_bar(x = cyl, y = rep(1, length(cyl)), 
+         data = mtcars, color = gear, hover = TRUE)
+ba
+
+ba <- figure() %>%
+  ly_bar(cyl, gear, data = mtcars)
+  
+  
+figure() %>%
+  ly_bar(variety, yield, data = lattice::barley, hover = TRUE) %>%
+  theme_axis("x", major_label_orientation = 90)  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+
+

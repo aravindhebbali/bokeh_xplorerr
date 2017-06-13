@@ -99,8 +99,8 @@ bokatter <- function(fig_height = NULL, fig_width = NULL, fig_title = NULL,
                  border_fill_color = 'black',
                  outline_line_alpha = 1,
                  outline_line_color = "black", outline_line_width = 1,
-             min_border = 50, min_border_bottom = 50, min_border_left = 50,
-             min_border_right = 50, min_border_top = 50) %>%
+                 min_border = 50, min_border_bottom = 50, min_border_left = 50,
+                 min_border_right = 50, min_border_top = 50) %>%
       theme_legend(background_fill_alpha = 0.95, background_fill_color = "#444444",
                    border_line_alpha = 0.5, border_line_color = "black",
                    border_line_width = 1, glyph_height = 20, glyph_width = 20,
