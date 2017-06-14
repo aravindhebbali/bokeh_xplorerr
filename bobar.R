@@ -13,10 +13,12 @@ bobar <- function(fig_height = NULL, fig_width = NULL, fig_title = NULL,
                   text_baseline = NULL, text_font = NULL, 
                   text_fontsize = NULL, text_fontstyle = NULL, 
                   text_xoffset = NULL, text_yoffset = NULL, 
-                  text_legend = NULL, title_align = 'left', title_alpha = 1,
+                  text_legend = NULL, 
+                  modify_title = FALSE, title_align = 'left', title_alpha = 1,
                   title_baseline = 'bottom', title_color = "#444444",
                   title_font = "Helvetica", title_fontsize = 12,
-                  title_fontstyle = 'normal', num_minor_ticks = 5, 
+                  title_fontstyle = 'normal', 
+                  modify_axis = FALSE, num_minor_ticks = 5, 
                   a_l_t_align = "left", a_l_t_alpha = 1, 
                   a_l_t_baseline = "bottom", a_l_t_color = "#444444", 
                   a_l_t_font = "Helvetica", a_l_t_font_size = "12pt", 
@@ -29,14 +31,17 @@ bobar <- function(fig_height = NULL, fig_width = NULL, fig_title = NULL,
                   m_t_l_alpha = 1, m_t_l_color = "black", 
                   m_t_l_width = 1,  min_t_l_alpha = 1, 
                   min_t_l_color = "black", 
-                  min_t_l_width = 1, b_f_alpha = 0, b_f_color = "white", 
+                  min_t_l_width = 1, 
+                  modify_grid = FALSE, b_f_alpha = 0, b_f_color = "white", 
                   g_l_alpha = 0, g_l_color = "black", g_l_width = 1,
                   min_g_l_alpha = 0, min_g_l_color = "black", 
-                  min_g_l_width = 1, bg_f_color = 'white', bg_f_alpha = 1,
+                  min_g_l_width = 1, 
+                  modify_plot = FALSE, bg_f_color = 'white', bg_f_alpha = 1,
                   bor_f_color = 'black', out_l_alpha = 1,
                   out_l_color = "black", out_l_width = 1,
                   min_bor = 50, min_bor_bottom = 50, min_bor_left = 50,
-                  min_bor_right = 50, min_bor_top = 50, bg_fill_alpha = 0.95, 
+                  min_bor_right = 50, min_bor_top = 50, 
+                  modify_legend = FALSE, bg_fill_alpha = 0.95, 
                   bg_fill_color = "#444444",
                   bor_line_alpha = 0.5, bor_line_color = "black",
                   bor_line_width = 1, glyph_h = 20, glyph_w = 20,
@@ -66,8 +71,20 @@ bobar <- function(fig_height = NULL, fig_width = NULL, fig_title = NULL,
     theme_title(text_align = title_align, text_alpha = title_alpha, 
                 text_baseline = title_baseline, text_color = title_color,
                 text_font = title_font, text_font_size = title_fontsize,
-                text_font_style = title_fontstyle) %>%
-    theme_axis(which = c("x", "y"), num_minor_ticks = 5, 
+                text_font_style = title_fontstyle)
+
+  if(modify_title) {
+    ba <- ba %>%
+      theme_title(text_align = title_align, text_alpha = title_alpha, 
+                text_baseline = title_baseline, text_color = title_color,
+                text_font = title_font, text_font_size = title_fontsize,
+                text_font_style = title_fontstyle)
+  }
+
+  if(modify_axis) {
+
+    ba <- ba %>%
+      theme_axis(which = c("x", "y"), num_minor_ticks = 5, 
                axis_label_text_align = a_l_t_align,
                axis_label_text_alpha = a_l_t_alpha, 
                axis_label_text_baseline = a_l_t_baseline, 
@@ -91,22 +108,36 @@ bobar <- function(fig_height = NULL, fig_width = NULL, fig_title = NULL,
                major_tick_line_width = m_t_l_width,  
                minor_tick_line_alpha = min_t_l_alpha, 
                minor_tick_line_color = min_t_l_color, 
-               minor_tick_line_width = min_t_l_width
-    ) %>%
-    theme_grid(which = c("x", "y"), band_fill_alpha = b_f_alpha,
+               minor_tick_line_width = min_t_l_width)
+  }  
+     
+  if(modify_grid) {
+
+    ba <- ba %>%
+      theme_grid(which = c("x", "y"), band_fill_alpha = b_f_alpha,
                band_fill_color = b_f_color, grid_line_alpha = g_l_alpha,
                grid_line_color = g_l_color, grid_line_width = g_l_width,
                minor_grid_line_alpha = min_g_l_alpha, 
                minor_grid_line_color = min_g_l_color, 
-               minor_grid_line_width = min_g_l_width) %>%
-    theme_plot(background_fill_color = 'white', 
+               minor_grid_line_width = min_g_l_width)
+  }
+  
+  if(modify_plot) {
+
+    ba <- ba %>%
+      theme_plot(background_fill_color = 'white', 
                background_fill_alpha = 1,
                border_fill_color = 'black',
                outline_line_alpha = 1,
                outline_line_color = "black", outline_line_width = 1,
                min_border = 50, min_border_bottom = 50, min_border_left = 50,
-               min_border_right = 50, min_border_top = 50) %>%
-    theme_legend(background_fill_alpha = 0.95, background_fill_color = "#444444",
+               min_border_right = 50, min_border_top = 50)
+  }
+  
+  if(modify_legend) {
+
+    ba <- ba %>%
+      theme_legend(background_fill_alpha = 0.95, background_fill_color = "#444444",
                  border_line_alpha = 0.5, border_line_color = "black",
                  border_line_width = 1, glyph_height = 20, glyph_width = 20,
                  label_height = 20, label_text_align = lab_t_align,
@@ -116,6 +147,7 @@ bobar <- function(fig_height = NULL, fig_width = NULL, fig_title = NULL,
                  label_text_font_size = lab_t_font_size,
                  label_text_font_style = lab_t_font_style, label_width = lab_w,
                  legend_padding = leg_pad, legend_spacing = leg_space)
+  }               
   
   if(add_text) {
     
