@@ -18,7 +18,7 @@ p
 
 # histogram with density
 h <- figure(width = 400, height = 300) %>%
-  ly_hist(eruptions, data = faithful, breaks = 10, freq = FALSE) %>%
+  ly_hist(eruptions, data = faithful, breaks = 5, freq = TRUE) %>%
   ly_density(eruptions, data = faithful)
 h
 
