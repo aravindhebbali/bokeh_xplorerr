@@ -121,7 +121,7 @@ bohist <- function(fig_height = NULL, fig_width = NULL, fig_title = NULL,
   
   if(add_text) {
     
-    p <- p %>%
+    h <- h %>%
       ly_text(x = text_x, y = text_y, text = point_text, data = data, 
               color = text_color, alpha = text_alpha, angle = text_angle, 
               align = text_align, baseline = text_baseline, font = text_font,
